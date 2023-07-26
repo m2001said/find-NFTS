@@ -1,15 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { COLORS, SIZES } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 import NFTImage from "./NFTImage";
 import NFTAvatars from "./NFTAvatars";
 import NFTTitle from "./NFTTitle";
 import NFTInfo from "./NFTInfo";
 
 const NFTCard = ({ NFTData }) => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("NFTS-details", { NFTData });
+        }}
+      >
         <NFTImage image={NFTData.image} imageStyles={styles.imageStyles} />
       </TouchableOpacity>
 

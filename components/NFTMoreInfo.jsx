@@ -1,12 +1,26 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
+import { COLORS } from "../constants";
 
-const NFTMoreInfo = () => {
+const NFTMoreInfo = ({ title, content }) => {
   return (
-    <View>
-      <Text>NFTMoreInfo</Text>
+    <View style={styles.container}>
+      <Text style={{ color: COLORS.gray }}>{title}</Text>
+      <Text style={{ color: COLORS.gray }}>{content}</Text>
     </View>
   );
 };
 
 export default NFTMoreInfo;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomColor: COLORS.cardBg,
+    borderBottomWidth: 1,
+    paddingBottom: 2,
+    paddingTop: 2,
+  },
+});

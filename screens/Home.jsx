@@ -17,14 +17,38 @@ import { StatusBar } from "react-native";
 const Home = () => {
   const [nftsData, setNftsData] = useState(DATA);
 
+  const searchHandler = (value) => {
+    if (value) {
+      const filterData = DATA.filter((nft) => nft.name.toLowerCase().includes(value.toLowerCase()));
+      setNftsData(filterData);
+    } else {
+      setNftsData(DATA);
+    }
+  };
+
+  const NotFoundNFT = () => {
+    return (
+      <View style={styles.notFoundContainer}>
+        <Text style={styles.notFoundText}>Opps.... ! </Text>
+        <Text style={styles.notFoundText}>Not found the NFT</Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={nftsData}
-          renderItem={({ item }) => <NFTCard NFTData={item} />}
-          keyExtractor={(item) => item.id}
-        />
+        <HomeHeader searchHandler={searchHandler} />
+
+        {!nftsData.length ? (
+          <NotFoundNFT />
+        ) : (
+          <FlatList
+            data={nftsData}
+            renderItem={({ item }) => <NFTCard NFTData={item} />}
+            keyExtractor={(item) => item.id}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
